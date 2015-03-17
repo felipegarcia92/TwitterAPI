@@ -12,6 +12,8 @@ describe User do
   it { should validate_presence_of(:last_name) }
   it { should validate_presence_of(:email) }
 
+  it { should have_many(:tweets) }
+
   it "has a valid email" do
     expect(FactoryGirl.build(:user, email: "failedtest").valid?).to be false
     expect(FactoryGirl.build(:user, email: "pass@test.com").valid?).to be true

@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   before_create :encrypt_password
   before_update :encrypt_password
 
+  has_many :tweets
+
   def encrypt_password
       self.encrypted_password = Digest::SHA1.hexdigest(encrypted_password)
   end
