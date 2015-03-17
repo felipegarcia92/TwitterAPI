@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :encrypted_password
 
-  before_create :encrypt_password
+  before_create :encrypt_password, :set_session_token
   before_update :encrypt_password
 
   has_many :tweets
