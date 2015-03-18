@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
   before_create :encrypt_password, :set_session_token
   before_update :encrypt_password
 
-  has_many :tweets
+  #has_many :tweets
+  has_many :tweets, through: :user_like_tweets, class_name: 'Tweet'
 
   def encrypt_password
       self.encrypted_password = Digest::SHA1.hexdigest(encrypted_password)

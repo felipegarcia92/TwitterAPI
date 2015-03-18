@@ -4,4 +4,5 @@ class UserLikeTweet < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :tweet_id, presence: true
+  validates :tweet, uniqueness: { scope: :user }
 end

@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
-      resources :users, :tweets
+      resources :users, only: :show
+      resources :tweets, only: [:show, :create, :destroy, :update]
     end
   end
 
