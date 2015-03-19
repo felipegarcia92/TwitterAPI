@@ -30,6 +30,6 @@ describe User do
   end
 
   it "has a correct password callback" do
-    expect(FactoryGirl.create(:user, encrypted_password: "morethansixchar").encrypted_password).to eq(Digest::SHA1.hexdigest("morethansixchar"))
+    expect(FactoryGirl.create(:user, password: "morethansixchar").encrypted_password).to eq(Digest::SHA1.hexdigest("morethansixchar"))
   end
 end

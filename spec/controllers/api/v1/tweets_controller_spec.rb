@@ -69,4 +69,27 @@ RSpec.describe Api::V1::TweetsController, type: :controller do
       expect(response.status).to eq(204)
     end
   end
+
+  describe "POST like" do
+    it "likes a tweet" do
+      user = FactoryGirl.create(:user)
+      tweet = FactoryGirl.create(:tweet)
+
+      post :like, tweet_id: tweet.id, token: user.session_token
+
+      expect(UserLikeTweet.find_by(tweet_id: tweet.id, user_id: user.id).present?).to be true
+    end
+  end
+
+  describe "DELETE like" do
+    it "dislikes a tweet" do
+      user = FactoryGirl.create(:user)
+      tweet = FactoryGirl.create(:tweet)
+
+      post :like, tweet_id: tweet.id, token: user.session_token
+      delete :dislike, tweet_id: tweet.id, token: user.session_token
+
+      expect(UserLikeTweet.find_by(tweet_id: tweet.id, user_id: user.id).present?).to be false
+    end
+  end
 end

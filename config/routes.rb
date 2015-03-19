@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       resources :users, only: :show
-      resources :tweets, only: [:show, :create, :destroy, :update]
+      resources :tweets, only: [:show, :create, :destroy, :update, :like, :dislike] do
+        post "like", to: "tweets#like"
+        delete "like", to: "tweets#dislike"
+      end
+      resource :sessions, path: "login", as: "login", only: :login do
+        post "", to: 'sessions#login'
+      end
     end
   end
 
