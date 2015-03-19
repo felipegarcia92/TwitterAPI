@@ -13,21 +13,25 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :session_token, uniqueness: true
 
-  attr_accessor :encrypted_password
+  attr_accessor :password
 
-  before_create :encrypt_password, :set_session_token
-  before_update :encrypt_password
+  before_create :set_session_token
+  before_save :encrypt_password
 
   #has_many :tweets
   has_many :tweets, through: :user_like_tweets, class_name: 'Tweet'
 
   def encrypt_password
-      self.encrypted_password = Digest::SHA1.hexdigest(encrypted_password)
+      self.encrypted_password = Digest::SHA1.hexdigest(password) if password.present?
   end
 
   def set_session_token
     return if session_token.present?
     self.session_token = generate_session_token
+  end
+
+  def new
+    @user = User.new
   end
 
   private
