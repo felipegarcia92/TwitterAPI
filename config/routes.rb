@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  get 'users/new'
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :users, only: :show
+      resources :tweets, only: [:show, :create, :destroy, :update]
+    end
+  end
+
+  #resources :tweets
+  #root to: 'tweets#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
