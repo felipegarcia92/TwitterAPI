@@ -1,0 +1,12 @@
+<h1>Listing tweets</h1>
+<table>
+  <tr>
+    <th>Status</th>
+    <th>User</th>
+  </tr>
+  <% @tweets.each do |tweet| %>
+    <tr>
+      <%= render 'tweet', :tweet => tweet %>
+    </tr>
+  <% end %>
+</table>

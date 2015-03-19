@@ -3,6 +3,7 @@ require 'digest/sha1'
 module Api
   module V1
     class SessionsController < APIController
+      skip_before_action :authenticate_user!, only: :login
 
       def login
         user = User.find_by(email: params[:email])
