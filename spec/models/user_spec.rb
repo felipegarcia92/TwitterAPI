@@ -20,8 +20,8 @@ describe User do
   end
 
   it "has a 6-length password at least" do
-    expect(FactoryGirl.build(:user, encrypted_password: "5char").valid?).to be false
-    expect(FactoryGirl.build(:user, encrypted_password: "morethansixchar").valid?).to be true
+    expect(FactoryGirl.build(:user, password: "5char").valid?).to be false
+    expect(FactoryGirl.build(:user, password: "morethansixchar").valid?).to be true
   end
 
   it "has unique emails" do

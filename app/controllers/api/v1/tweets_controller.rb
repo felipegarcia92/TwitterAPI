@@ -1,6 +1,14 @@
 module Api
   module V1
     class TweetsController < APIController
+
+      def index
+        tweets = Tweet.bydate
+        if tweets
+          render json: tweets, status: :ok
+        end
+      end
+
       def show
         tweet = Tweet.find(params[:id])
         if tweet

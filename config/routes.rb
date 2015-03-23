@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       resources :users, only: :show
-      resources :tweets, only: [:show, :create, :destroy, :update, :like, :dislike] do
+      resources :tweets, only: [:index, :show, :create, :destroy, :update, :like, :dislike] do
         post "like", to: "tweets#like"
         delete "like", to: "tweets#dislike"
       end
@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   end
 
   resources :home, only: :landing
+  resources :users, only: [:new, :create]
+  resource :sessions, path: "login", as: "login", only: :login do
+    get "", to: 'sessions#new', as: ''
+    post "", to: 'sessions#login', as: 'submit'
+  end
   root to: "home#landing"
 
   # The priority is based upon order of creation: first created -> highest priority.

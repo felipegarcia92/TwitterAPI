@@ -3,7 +3,7 @@ require 'digest/sha1'
 module Api
   module V1
     class SessionsController < APIController
-      skip_before_action :authenticate_user!, only: :login
+      skip_before_action :authenticate_user, only: :login
 
       def login
         user = User.find_by(email: params[:email])
@@ -11,9 +11,9 @@ module Api
           user.set_session_token
           user.save
 
-          render json: user.session_token, status: :ok
+          render json: user, status: :ok
         else
-          render json: "Authentication error", status: 401
+          render json: "401 Login error", status: 401
         end
       end
 

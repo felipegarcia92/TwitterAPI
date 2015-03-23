@@ -1,12 +1,24 @@
-<h1>Listing tweets</h1>
-<table>
+<% if @current_user.present? %>
+  <div><%= @current_user.first_name + ' ' + @current_user.last_name %></div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<%= link_to 'Sign Up', new_user_path %>
+<%= link_to 'Sign In', login_path %>
+
+<h2>Listing tweets</h2>￼
+<br />
+<table style='width: 30%'>
   <tr>
     <th>Status</th>
     <th>User</th>
   </tr>
   <% @tweets.each do |tweet| %>
     <tr>
-      <%= render 'tweet', :tweet => tweet %>
+      <%= render 'tweet_show', :tweet => tweet %>
     </tr>
   <% end %>
 </table>

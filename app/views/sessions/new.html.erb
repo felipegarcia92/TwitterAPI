@@ -1,0 +1,17 @@
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+<br />
+<%= form_tag(submit_login_path, :method=>'post') do %>
+  <p>
+    Email:<br />
+    <%= text_field_tag "email" %>
+  </p>
+  <p>
+    Password:<br />
+    <%= text_field_tag "password" %>
+  </p>
+  <p>
+    <%= submit_tag 'Submit' %>
+  </p>
+<% end %>

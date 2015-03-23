@@ -9,11 +9,11 @@ class Tweet < ActiveRecord::Base
   scope :bydate, -> { order("created_at desc") }
 
   def liked_by(user)
-    user_like_tweets.create(user_id: user.id) unless user_like_tweets.exist? user_id: user_id
+    user_like_tweets.create(user_id: user.id) unless user_like_tweets.exists? user_id: user_id
   end
 
   def disliked_by(user)
-    like = UserLikeTweet.where(user_id: user.id, tweet_id: self.id)
+    like = UserLikeTweet.find_by(user_id: user.id, tweet_id: self.id)
     if like.present?
       like.destroy
     end
