@@ -29,8 +29,9 @@ gem 'json_builder'
 #Factory Girl
 gem 'factory_girl'
 #Bcrypt
-gem 'bcrypt-ruby', :require => 'bcrypt' 
-
+gem 'bcrypt-ruby', :require => 'bcrypt'
+#Carrierweb to upload
+gem 'carrierwave'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -49,5 +50,9 @@ group :development, :test do
  gem 'factory_girl_rails'
  gem 'faker'
  gem 'database_cleaner'
+ #Capybara
+ gem 'capybara'
+ #Poltergeist
+ gem 'poltergeist'
 end
 

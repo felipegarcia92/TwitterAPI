@@ -17,7 +17,6 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
       post :login, email: user.email, password: "fail.password"
 
       expect(response.status).to eq(401)
-      expect(response.body).to eq("Authentication error")
     end
 
     it "returns error if the email is incorrect" do
@@ -26,7 +25,6 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
       post :login, email: "felipe@toptierlabs.com", password: "pass1234"
 
       expect(response.status).to eq(401)
-      expect(response.body).to eq("Authentication error")
     end
   end
 end

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   uniqueness: true,
   format: { with: EMAIL_REGEX }
 
-  validates :encrypted_password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :session_token, uniqueness: true
@@ -18,8 +18,10 @@ class User < ActiveRecord::Base
   before_create :set_session_token
   before_save :encrypt_password
 
-  #has_many :tweets
   has_many :tweets, through: :user_like_tweets, class_name: 'Tweet'
+
+  #CarrierWave Uploader
+  mount_uploader :avatar, AvatarUploader
 
   def encrypt_password
       self.encrypted_password = Digest::SHA1.hexdigest(password) if password.present?
@@ -28,10 +30,6 @@ class User < ActiveRecord::Base
   def set_session_token
     return if session_token.present?
     self.session_token = generate_session_token
-  end
-
-  def new
-    @user = User.new
   end
 
   private

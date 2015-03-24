@@ -25,6 +25,25 @@ RSpec.describe Api::V1::TweetsController, type: :controller do
     end
   end
 
+  describe "GET index" do
+
+    it 'gets tweets by date' do
+      tweet = FactoryGirl.create(:tweet)
+      tweet2 = FactoryGirl.create(:tweet)
+      tweet3 = FactoryGirl.create(:tweet)
+      user = FactoryGirl.create(:user)
+
+      get :index, token: user.session_token
+
+      expect(response).to be_success # test for the 200 status-code
+      json = JSON.parse(response.body)
+      expect(json[0]['id']).to eq(tweet3.id) # check to make sure the id is the same
+      expect(json[1]['id']).to eq(tweet2.id) # check to make sure the id is the same
+      expect(json[2]['id']).to eq(tweet.id) # check to make sure the id is the same
+    end
+
+  end
+
   describe "POST create" do
     it "creates a valid tweet" do
       user = FactoryGirl.create(:user)
